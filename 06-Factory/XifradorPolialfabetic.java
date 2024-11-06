@@ -1,4 +1,3 @@
-package iticbcn.xifratge;
 import java.util.*;
 
 public class XifradorPolialfabetic implements Xifrador {

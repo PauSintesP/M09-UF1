@@ -1,4 +1,3 @@
-package iticbcn.xifratge;
 
 public class TextXifrat {
     private final byte[] bytes;

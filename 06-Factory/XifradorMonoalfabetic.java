@@ -1,4 +1,3 @@
-package iticbcn.xifratge;
 import java.util.*;
 public class XifradorMonoalfabetic implements Xifrador {
     private final char[] AbecedariMin = "abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ".toCharArray();
