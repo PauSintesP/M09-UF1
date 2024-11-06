@@ -1,11 +1,11 @@
 package iticbcn.xifratge;
 import java.util.*;
 
-public class XifradorPolialfabetic {
-    private  final long CONTRASENYA = 123456789;
-    private  final char[] AbecedariMin = "abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ".toCharArray();
-    private  char[] AbecedariMinPermutat;
-    private  Random random;
+public class XifradorPolialfabetic implements Xifrador {
+    private static final long CONTRASENYA = 123456789;
+    private static final char[] AbecedariMin = "abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ".toCharArray();
+    private static char[] AbecedariMinPermutat;
+    private Random random;
 
     public  void main(String[] args) {
         String textOriginal = "text random àáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ";
@@ -16,6 +16,26 @@ public class XifradorPolialfabetic {
 
         String textDesxifrat = desxifraPoliAlfa(textXifrat);
         System.out.println("Text desxifrat: " + textDesxifrat);
+    }
+    public TextXifrat xifra(String msg, String clau) throws ClauNoSuportada {
+        try {
+            long seed = Long.parseLong(clau);
+            this.random = new Random(seed);
+            byte[] output = xifraPoliAlfa(msg).getBytes();
+            return new TextXifrat(output);
+        } catch (NumberFormatException e) {
+            throw new ClauNoSuportada("La clau per xifrat Polialfabètic ha de ser un String convertible a long");
+        }
+    }
+
+    public String desxifra(TextXifrat xifrat, String clau) throws ClauNoSuportada {
+        try {
+            long seed = Long.parseLong(clau);
+            this.random = new Random(seed);
+            return desxifraPoliAlfa(new String(xifrat.getBytes()));
+        } catch (NumberFormatException e) {
+            throw new ClauNoSuportada("La clau per xifrat Polialfabètic ha de ser un String convertible a long");
+        }
     }
 
     public  void inicialitzaRandom() {

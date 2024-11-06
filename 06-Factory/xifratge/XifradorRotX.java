@@ -1,26 +1,31 @@
 package iticbcn.xifratge;
 import java.util.Scanner;
 
-public class XifradorRotX {
-     final char[] lletresMin = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','à','è','é','í','ï','ò','ó','ú','ü'};
-     final char[] lletresMaj = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','À','È','É','Í','Ï','Ò','Ó','Ú','Ü'};
+public class XifradorRotX implements Xifrador {
+
+    private int parseClau(String clau) throws ClauNoSuportada {
+        try {
+            return Integer.parseInt(clau);
+        } catch (NumberFormatException e) {
+            throw new ClauNoSuportada("Format Invalid");
+        }
+    }
+     final static char[] lletresMin = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','à','è','é','í','ï','ò','ó','ú','ü'};
+     final static char[] lletresMaj = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','À','È','É','Í','Ï','Ò','Ó','Ú','Ü'};
     
-    public  void main(String[] args) {
-        System.out.println("Escriu un text perque sigui codificat");
-        String text = "";
-        Scanner scanner = new Scanner(System.in);
-        text = scanner.nextLine();
-        System.out.println("Escriu un valor per xifrar el text");
-        Scanner scanner1 = new Scanner(System.in);
-        int x = scanner1.nextInt();
-        scanner1.close();
-        scanner.close();
-        System.out.println("Text codificat: " + xifraRotX(text, x));
-        System.out.println("Text descodificat: " + desxifraRotX(xifraRotX(text, x),x));
-        forcaBrutaRotX(xifraRotX(text, x));
+
+
+     public TextXifrat xifra(String msg, String clau) throws ClauNoSuportada {
+        int x = parseClau(clau);
+        byte[] output = xifraRotX(msg, x).getBytes();
+        return new TextXifrat(output);
     }
 
-    public  String xifraRotX(String text, int x) {
+    public String desxifra(TextXifrat xifrat, String clau) throws ClauNoSuportada {
+        int x = parseClau(clau);
+        return desxifraRotX(new String(xifrat.getBytes()), x);
+    }
+    private String xifraRotX(String text, int x) {
         String nouText = "";
         
         for (int i = 0; i < text.length(); i++) {
@@ -46,8 +51,9 @@ public class XifradorRotX {
 
         return  nouText;
     }
+    
 
-    public  String desxifraRotX(String text, int x) {
+    private String desxifraRotX(String text, int x) {
         String nouText = "";
 
         for (int i = 0; i < text.length(); i++) {
@@ -83,7 +89,7 @@ public class XifradorRotX {
         return -1;
     }
 
-    public  void forcaBrutaRotX(String text) {
+    private void forcaBrutaRotX(String text) {
         for ( int i = 0; i < lletresMin.length; i++){
             System.out.println("Xifrat amb x = " + i + ": " + desxifraRotX(text, i));
         }
