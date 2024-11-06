@@ -1,7 +1,5 @@
+package iticbcn.xifratge;
 import java.util.*;
-import iticbcn.xifratge.Xifrador;
-import iticbcn.xifratge.TextXifrat;
-import iticbcn.xifratge.ClauNoSuportada;
 public class XifradorMonoalfabetic implements Xifrador {
     private final char[] AbecedariMin = "abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ".toCharArray();
     private final char[] AbecedariMag = "abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ".toUpperCase().toCharArray();

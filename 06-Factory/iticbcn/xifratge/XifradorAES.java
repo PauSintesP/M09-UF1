@@ -1,9 +1,6 @@
+package iticbcn.xifratge;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import iticbcn.xifratge.ClauNoSuportada;
-import iticbcn.xifratge.TextXifrat;
-import iticbcn.xifratge.Xifrador;
-
 import javax.crypto.spec.IvParameterSpec;
 import java.security.MessageDigest;
 import java.util.Base64;
