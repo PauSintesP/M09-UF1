@@ -1,5 +1,4 @@
 package iticbcn.xifratge;
-import java.util.Scanner;
 
 public class XifradorRotX implements Xifrador {
 
